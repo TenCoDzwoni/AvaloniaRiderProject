@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>MainWindow.axaml.cs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6c95eb;}
+.s1 { color: #d0d0d0;}
+.s2 { color: #bdbdbd;}
+.s3 { color: #c9a26d;}
+</style>
+</head>
+<body bgcolor="#262626">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainWindow.axaml.cs</font>
+</center></td></tr></table>
+<pre><span class="s0">using </span><span class="s1">Avalonia</span><span class="s2">.</span><span class="s1">Controls</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">Avalonia</span><span class="s2">.</span><span class="s1">Interactivity</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">System</span><span class="s2">.</span><span class="s1">Collections</span><span class="s2">.</span><span class="s1">ObjectModel</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">System</span><span class="s2">.</span><span class="s1">Linq</span><span class="s2">;</span>
+<span class="s0">namespace </span><span class="s1">ToDoList</span>
+<span class="s2">{</span>
+    <span class="s0">public </span><span class="s1">partial </span><span class="s0">class </span><span class="s1">MainWindow : Window</span>
+    <span class="s2">{</span>
+        <span class="s0">public class </span><span class="s1">TaskItem</span>
+        <span class="s2">{</span>
+            <span class="s0">public string </span><span class="s1">Description </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; }</span>
+            <span class="s0">public bool </span><span class="s1">IsCompleted </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; }</span>
+            <span class="s0">public override string </span><span class="s1">ToString</span><span class="s2">()</span>
+            <span class="s2">{</span>
+                <span class="s0">return </span><span class="s1">Description</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">public </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s1">TaskItem</span><span class="s2">&gt; </span><span class="s1">Tasks </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; } = </span><span class="s0">new </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s1">TaskItem</span><span class="s2">&gt;();</span>
+
+        <span class="s0">public </span><span class="s1">MainWindow</span><span class="s2">()</span>
+        <span class="s2">{</span>
+            <span class="s1">InitializeComponent</span><span class="s2">();</span>
+            <span class="s1">DataContext </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">private void </span><span class="s1">AddTask</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">RoutedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var taskDescription </span><span class="s2">= </span><span class="s1">taskTextBox</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">.</span><span class="s1">Trim</span><span class="s2">();</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">!</span><span class="s0">string</span><span class="s2">.</span><span class="s1">IsNullOrEmpty</span><span class="s2">(</span><span class="s1">taskDescription</span><span class="s2">))</span>
+            <span class="s2">{</span>
+                <span class="s1">Tasks</span><span class="s2">.</span><span class="s1">Add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">TaskItem </span><span class="s2">{ </span><span class="s1">Description </span><span class="s2">= </span><span class="s1">taskDescription</span><span class="s2">, </span><span class="s1">IsCompleted </span><span class="s2">= </span><span class="s0">false </span><span class="s2">});</span>
+                <span class="s1">taskTextBox</span><span class="s2">.</span><span class="s1">Clear</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}        </span>
+        <span class="s0">private void </span><span class="s1">DeleteTask</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">RoutedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var selectedTask </span><span class="s2">= </span><span class="s1">tasksListBox</span><span class="s2">.</span><span class="s1">SelectedItem </span><span class="s0">as </span><span class="s1">TaskItem</span><span class="s2">;</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedTask </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s1">Tasks</span><span class="s2">.</span><span class="s1">Remove</span><span class="s2">(</span><span class="s1">selectedTask</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">private void </span><span class="s1">OnFilterChange</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">SelectionChangedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var selectedFilter </span><span class="s2">= (</span><span class="s1">filter</span><span class="s2">.</span><span class="s1">SelectedItem </span><span class="s0">as </span><span class="s1">ComboBoxItem</span><span class="s2">)</span><span class="s1">?</span><span class="s2">.</span><span class="s1">Content</span><span class="s2">.</span><span class="s1">ToString</span><span class="s2">();</span>
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">selectedFilter</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s0">case </span><span class="s3">&quot;Do zrobienia&quot;</span><span class="s1">:</span>
+                    <span class="s1">tasksListBox</span><span class="s2">.</span><span class="s1">ItemsSource </span><span class="s2">= </span><span class="s1">Tasks</span><span class="s2">.</span><span class="s1">Where</span><span class="s2">(</span><span class="s1">task =&gt; !task</span><span class="s2">.</span><span class="s1">IsCompleted</span><span class="s2">).</span><span class="s1">ToList</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s3">&quot;Zrobione&quot;</span><span class="s1">:</span>
+                    <span class="s1">tasksListBox</span><span class="s2">.</span><span class="s1">ItemsSource </span><span class="s2">= </span><span class="s1">Tasks</span><span class="s2">.</span><span class="s1">Where</span><span class="s2">(</span><span class="s1">task =&gt; task</span><span class="s2">.</span><span class="s1">IsCompleted</span><span class="s2">).</span><span class="s1">ToList</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s1">default:</span>
+                    <span class="s1">tasksListBox</span><span class="s2">.</span><span class="s1">ItemsSource </span><span class="s2">= </span><span class="s1">Tasks</span><span class="s2">;</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span></pre>
+</body>
+</html>

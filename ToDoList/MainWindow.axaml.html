@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>MainWindow.axaml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d0d0d0;}
+</style>
+</head>
+<body bgcolor="#262626">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainWindow.axaml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot; 
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; 
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot; 
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; 
+         
+        mc:Ignorable=&quot;d&quot; d:DesignWidth=&quot;800&quot; d:DesignHeight=&quot;450&quot; 
+        x:Class=&quot;ToDoList.MainWindow&quot; 
+        Title=&quot;ToDoList&quot;&gt; 
+    &lt;StackPanel&gt; 
+        &lt;TextBox Name=&quot;taskTextBox&quot; Width=&quot;300&quot; Margin=&quot;10&quot; Watermark=&quot;Wpisz nowe zadanie&quot;/&gt; 
+        &lt;Button Content=&quot;Dodaj zadanie&quot; Width=&quot;100&quot; Height=&quot;40&quot; Margin=&quot;10&quot; Click=&quot;AddTask&quot;/&gt; 
+         
+        &lt;ComboBox Name=&quot;filter&quot; Width=&quot;200&quot; Margin=&quot;10&quot; SelectionChanged=&quot;OnFilterChange&quot;&gt; 
+            &lt;ComboBoxItem Content=&quot;Wszystkie&quot;/&gt; 
+            &lt;ComboBoxItem Content=&quot;Do zrobienia&quot;/&gt; 
+            &lt;ComboBoxItem Content=&quot;Zrobione&quot;/&gt; 
+        &lt;/ComboBox&gt; 
+ 
+        &lt;ListBox Name=&quot;tasksListBox&quot; Width=&quot;350&quot; Height=&quot;200&quot; Margin=&quot;10&quot;&gt; 
+        &lt;/ListBox&gt; 
+ 
+        &lt;Button Content=&quot;Usuń wybrane zadanie&quot; Width=&quot;200&quot; Height=&quot;40&quot; Margin=&quot;10&quot; 
+                Click=&quot;DeleteTask&quot;/&gt; 
+    &lt;/StackPanel&gt; 
+&lt;/Window&gt; 
+</span></pre>
+</body>
+</html>
