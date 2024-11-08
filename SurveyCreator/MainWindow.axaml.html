@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>MainWindow.axaml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d0d0d0;}
+</style>
+</head>
+<body bgcolor="#262626">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainWindow.axaml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot; 
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; 
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot; 
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; 
+         
+        mc:Ignorable=&quot;d&quot; d:DesignWidth=&quot;800&quot; d:DesignHeight=&quot;600&quot; 
+        x:Class=&quot;SurveyApp.MainWindow&quot; 
+        Title=&quot;Tworzenie Ankiety&quot;&gt; 
+    &lt;StackPanel&gt; 
+        &lt;TextBox Name=&quot;questionTextBox&quot; Width=&quot;300&quot; Margin=&quot;10&quot; Watermark=&quot;Masz pytanie?&quot;/&gt; 
+        &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;10&quot;&gt; 
+            &lt;RadioButton Name=&quot;singleChoiceRadioButton&quot; Content=&quot;Jednokrotny wybór&quot; Margin=&quot;5&quot;/&gt; 
+            &lt;RadioButton Name=&quot;multipleChoiceRadioButton&quot; Content=&quot;Wielokrotny wybór&quot; Margin=&quot;5&quot;/&gt; 
+        &lt;/StackPanel&gt; 
+        &lt;ComboBox Name=&quot;categoryComboBox&quot; Width=&quot;200&quot; Margin=&quot;10&quot;&gt; 
+            &lt;ComboBoxItem Content=&quot;Technologia&quot;/&gt; 
+            &lt;ComboBoxItem Content=&quot;Edukacja&quot;/&gt; 
+            &lt;ComboBoxItem Content=&quot;Rozrywka&quot;/&gt; 
+        &lt;/ComboBox&gt; 
+        &lt;TextBox Name=&quot;answerTextBox&quot; Width=&quot;300&quot; Margin=&quot;10&quot; Watermark=&quot;Wpisz odpowiedź&quot;/&gt; 
+        &lt;Button Content=&quot;Dodaj odpowiedź&quot; Width=&quot;150&quot; Height=&quot;40&quot; Margin=&quot;10&quot; Click=&quot;AddAnswer&quot;/&gt; 
+        &lt;ListBox Name=&quot;answerListBox&quot; Width=&quot;300&quot; Height=&quot;150&quot; Margin=&quot;10&quot;/&gt; 
+        &lt;Button Content=&quot;Dodaj pytanie&quot; Width=&quot;150&quot; Height=&quot;40&quot; Margin=&quot;10&quot; Click=&quot;AddQuestion&quot;/&gt; 
+        &lt;ListBox Name=&quot;questionsListBox&quot; Width=&quot;350&quot; Height=&quot;200&quot;   
+                 Margin=&quot;10&quot; ItemsSource=&quot;{Binding Questions}&quot;/&gt; 
+        &lt;Button Content=&quot;Zapisz ankietę&quot; Width=&quot;150&quot; Height=&quot;40&quot; Margin=&quot;10&quot; Click=&quot;SaveSurvey&quot;/&gt; 
+    &lt;/StackPanel&gt; 
+&lt;/Window&gt;</span></pre>
+</body>
+</html>

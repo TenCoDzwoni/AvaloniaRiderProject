@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>MainWindow.axaml.cs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6c95eb;}
+.s1 { color: #d0d0d0;}
+.s2 { color: #bdbdbd;}
+.s3 { color: #c9a26d;}
+</style>
+</head>
+<body bgcolor="#262626">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainWindow.axaml.cs</font>
+</center></td></tr></table>
+<pre><span class="s0">using </span><span class="s1">Avalonia</span><span class="s2">.</span><span class="s1">Controls</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">Avalonia</span><span class="s2">.</span><span class="s1">Interactivity</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">System</span><span class="s2">.</span><span class="s1">Collections</span><span class="s2">.</span><span class="s1">ObjectModel</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">System</span><span class="s2">.</span><span class="s1">IO</span><span class="s2">;</span>
+<span class="s0">using </span><span class="s1">System</span><span class="s2">.</span><span class="s1">Linq</span><span class="s2">;</span>
+<span class="s0">namespace </span><span class="s1">SurveyApp</span>
+<span class="s2">{</span>
+    <span class="s0">public </span><span class="s1">partial </span><span class="s0">class </span><span class="s1">MainWindow : Window</span>
+    <span class="s2">{</span>
+        <span class="s0">public class </span><span class="s1">QuestionItem</span>
+        <span class="s2">{</span>
+            <span class="s0">public string </span><span class="s1">Question </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; }</span>
+            <span class="s0">public bool </span><span class="s1">IsMultipleChoice </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; }</span>
+            <span class="s0">public </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s0">string</span><span class="s2">&gt; </span><span class="s1">Answers </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; } = </span><span class="s0">new </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s0">string</span><span class="s2">&gt;();</span>
+            <span class="s0">public string </span><span class="s1">Category </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; }</span>
+            <span class="s0">public override string </span><span class="s1">ToString</span><span class="s2">()</span>
+            <span class="s2">{</span>
+                <span class="s0">return </span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s1">Question</span><span class="s2">} </span><span class="s3">(</span><span class="s2">{</span><span class="s1">Category</span><span class="s2">}</span><span class="s3">)&quot;</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">public </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s1">QuestionItem</span><span class="s2">&gt; </span><span class="s1">Questions </span><span class="s2">{ </span><span class="s1">get</span><span class="s2">; </span><span class="s1">set</span><span class="s2">; } = </span><span class="s0">new </span><span class="s1">ObservableCollection</span><span class="s2">&lt;</span><span class="s1">QuestionItem</span><span class="s2">&gt;();</span>
+        <span class="s0">public </span><span class="s1">MainWindow</span><span class="s2">()</span>
+        <span class="s2">{</span>
+            <span class="s1">InitializeComponent</span><span class="s2">();</span>
+            <span class="s1">DataContext </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">private void </span><span class="s1">AddQuestion</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">RoutedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var questionText </span><span class="s2">= </span><span class="s1">questionTextBox</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">.</span><span class="s1">Trim</span><span class="s2">();</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">!</span><span class="s0">string</span><span class="s2">.</span><span class="s1">IsNullOrEmpty</span><span class="s2">(</span><span class="s1">questionText</span><span class="s2">))</span>
+            <span class="s2">{</span>
+                <span class="s1">var question </span><span class="s2">= </span><span class="s0">new </span><span class="s1">QuestionItem</span>
+                <span class="s2">{</span>
+                    <span class="s1">Question </span><span class="s2">= </span><span class="s1">questionText</span><span class="s2">,</span>
+                    <span class="s1">IsMultipleChoice </span><span class="s2">= </span><span class="s1">multipleChoiceRadioButton</span><span class="s2">.</span><span class="s1">IsChecked </span><span class="s2">== </span><span class="s0">true</span><span class="s2">,</span>
+                    <span class="s1">Category </span><span class="s2">= </span><span class="s1">categoryComboBox</span><span class="s2">.</span><span class="s1">SelectedItem </span><span class="s0">as string</span>
+                <span class="s2">};</span>
+                <span class="s0">foreach </span><span class="s2">(</span><span class="s1">var answerItem </span><span class="s0">in </span><span class="s1">answerListBox</span><span class="s2">.</span><span class="s1">Items</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">question</span><span class="s2">.</span><span class="s1">Answers</span><span class="s2">.</span><span class="s1">Add</span><span class="s2">(</span><span class="s1">answerItem</span><span class="s2">.</span><span class="s1">ToString</span><span class="s2">());</span>
+                <span class="s2">}</span>
+                <span class="s1">Questions</span><span class="s2">.</span><span class="s1">Add</span><span class="s2">(</span><span class="s1">question</span><span class="s2">);</span>
+                
+                <span class="s1">questionTextBox</span><span class="s2">.</span><span class="s1">Clear</span><span class="s2">();</span>
+                <span class="s1">answerListBox</span><span class="s2">.</span><span class="s1">Items</span><span class="s2">.</span><span class="s1">Clear</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">private void </span><span class="s1">SaveSurvey</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">RoutedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var saveDialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SaveFileDialog</span><span class="s2">();</span>
+            <span class="s1">var filePath </span><span class="s2">= </span><span class="s1">saveDialog</span><span class="s2">.</span><span class="s1">ShowAsync</span><span class="s2">(</span><span class="s0">this</span><span class="s2">).</span><span class="s1">Result</span><span class="s2">;</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">!</span><span class="s0">string</span><span class="s2">.</span><span class="s1">IsNullOrEmpty</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">))</span>
+            <span class="s2">{</span>
+                <span class="s0">using </span><span class="s2">(</span><span class="s1">var writer </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StreamWriter</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">))</span>
+                <span class="s2">{</span>
+                    <span class="s0">foreach </span><span class="s2">(</span><span class="s1">var question </span><span class="s0">in </span><span class="s1">Questions</span><span class="s2">)</span>
+                    <span class="s2">{</span>
+                        <span class="s1">writer</span><span class="s2">.</span><span class="s1">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;Pytanie: </span><span class="s2">{</span><span class="s1">question</span><span class="s2">.</span><span class="s1">Question</span><span class="s2">} </span><span class="s3">(</span><span class="s2">{</span><span class="s1">question</span><span class="s2">.</span><span class="s1">Category</span><span class="s2">}</span><span class="s3">)&quot;</span><span class="s2">);</span>
+                        <span class="s1">writer</span><span class="s2">.</span><span class="s1">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;Typ: </span><span class="s2">{(</span><span class="s1">question</span><span class="s2">.</span><span class="s1">IsMultipleChoice ? </span><span class="s3">&quot;Wielokrotny wybór&quot; </span><span class="s1">: </span><span class="s3">&quot;Jednokrotny wybór&quot;</span><span class="s2">)}</span><span class="s3">&quot;</span><span class="s2">);</span>
+                        <span class="s1">writer</span><span class="s2">.</span><span class="s1">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Odpowiedzi:&quot;</span><span class="s2">);</span>
+                        <span class="s0">foreach </span><span class="s2">(</span><span class="s1">var answer </span><span class="s0">in </span><span class="s1">question</span><span class="s2">.</span><span class="s1">Answers</span><span class="s2">)</span>
+                        <span class="s2">{</span>
+                            <span class="s1">writer</span><span class="s2">.</span><span class="s1">WriteLine</span><span class="s2">(</span><span class="s3">$&quot; - </span><span class="s2">{</span><span class="s1">answer</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s2">);</span>
+                        <span class="s2">}</span>
+                        <span class="s1">writer</span><span class="s2">.</span><span class="s1">WriteLine</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">private void </span><span class="s1">AddAnswer</span><span class="s2">(</span><span class="s0">object </span><span class="s1">sender</span><span class="s2">, </span><span class="s1">RoutedEventArgs e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">var answerText </span><span class="s2">= </span><span class="s1">answerTextBox</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">.</span><span class="s1">Trim</span><span class="s2">();</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">!</span><span class="s0">string</span><span class="s2">.</span><span class="s1">IsNullOrEmpty</span><span class="s2">(</span><span class="s1">answerText</span><span class="s2">))</span>
+            <span class="s2">{</span>
+                <span class="s1">answerListBox</span><span class="s2">.</span><span class="s1">Items</span><span class="s2">.</span><span class="s1">Add</span><span class="s2">(</span><span class="s1">answerText</span><span class="s2">);</span>
+                <span class="s1">answerTextBox</span><span class="s2">.</span><span class="s1">Clear</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
